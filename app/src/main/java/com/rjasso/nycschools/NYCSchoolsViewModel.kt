@@ -8,6 +8,6 @@ class NYCSchoolsViewModel(val NYCSchoolsRepo: NYCSchoolsRepository) : ViewModel(
 
     fun getData() {
         Log.d(TAG,"getData()")
-        NYCSchoolsRepo.getDataFromDB()
+        NYCSchoolsRepo.getDataFromAPI()
     }
 }
