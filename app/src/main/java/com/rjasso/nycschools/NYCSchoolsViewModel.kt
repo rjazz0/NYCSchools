@@ -8,6 +8,11 @@ import com.rjasso.nycschools.model.SchoolListItem
 class NYCSchoolsViewModel(val repository: NYCSchoolsRepository) : ViewModel() {
     val TAG = NYCSchoolsViewModel::class.java.name
 
+    fun getData() {
+        repository.getDataFromDB()
+        repository.getDataFromAPI()
+    }
+
     fun getSchools(): LiveData<List<SchoolListItem>> {
         Log.d(TAG, "getSchools()")
         return repository.getSchools()
