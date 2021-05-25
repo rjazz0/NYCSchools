@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
-        viewModel.getData()
+//        viewModel.getData()
+        viewModel.getSATData("21K728")
     }
 }

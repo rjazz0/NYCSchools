@@ -17,4 +17,9 @@ class NYCSchoolsViewModel(val repository: NYCSchoolsRepository) : ViewModel() {
         Log.d(TAG, "getSchools()")
         return repository.getSchools()
     }
+
+    fun getSATData(dbn: String) {
+        Log.d(TAG, "getSATData()")
+        return repository.getSATData(dbn)
+    }
 }
