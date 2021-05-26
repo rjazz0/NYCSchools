@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.rjasso.nycschools.model.SchoolListItem
 
-class SchoolAdapter(val schoolList: MutableList<SchoolListItem>) : RecyclerView.Adapter<SchoolAdapter.SchoolViewHolder>() {
+class SchoolAdapter(val schoolList: MutableList<SchoolListItem>, val schoolCallback: SchoolCallback) : RecyclerView.Adapter<SchoolAdapter.SchoolViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SchoolViewHolder {
          return SchoolViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.school_item, parent, false))
@@ -23,6 +23,12 @@ class SchoolAdapter(val schoolList: MutableList<SchoolListItem>) : RecyclerView.
         holder.itemView.findViewById<TextView>(R.id.interest).text = school.interest1
         holder.itemView.findViewById<TextView>(R.id.location).text = school.location
         holder.itemView.findViewById<TextView>(R.id.phone_number).text = school.phone_number
+        holder.itemView.setOnClickListener(object: View.OnClickListener{
+            override fun onClick(p0: View?) {
+                schoolCallback.callSchoolSATService(school.dbn)
+            }
+
+        })
     }
 
     class SchoolViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)

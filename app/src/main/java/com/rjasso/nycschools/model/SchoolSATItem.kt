@@ -1,5 +1,7 @@
 package com.rjasso.nycschools.model
 
+import java.io.Serializable
+
 data class SchoolSATItem(
     val dbn: String,
     val num_of_sat_test_takers: String,
@@ -7,4 +9,4 @@ data class SchoolSATItem(
     val sat_math_avg_score: String,
     val sat_writing_avg_score: String,
     val school_name: String
-)
+): Serializable

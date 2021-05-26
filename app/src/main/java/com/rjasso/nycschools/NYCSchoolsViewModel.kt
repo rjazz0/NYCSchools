@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.rjasso.nycschools.model.SchoolListItem
+import com.rjasso.nycschools.model.SchoolSATItem
 
 class NYCSchoolsViewModel(val repository: NYCSchoolsRepository) : ViewModel() {
     val TAG = NYCSchoolsViewModel::class.java.name
@@ -18,8 +19,12 @@ class NYCSchoolsViewModel(val repository: NYCSchoolsRepository) : ViewModel() {
         return repository.getSchools()
     }
 
-    fun getSATData(dbn: String) {
+    fun getSATData(): LiveData<SchoolSATItem>{
         Log.d(TAG, "getSATData()")
-        return repository.getSATData(dbn)
+        return repository.getSchoolsSAT()
+    }
+
+    fun getSATDataObject(dbn: String) {
+        repository.getSATData(dbn)
     }
 }

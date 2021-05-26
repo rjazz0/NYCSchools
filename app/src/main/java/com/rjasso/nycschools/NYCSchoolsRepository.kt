@@ -7,6 +7,7 @@ import com.rjasso.nycschools.database.NYCSchoolDB
 import com.rjasso.nycschools.model.SchoolList
 import com.rjasso.nycschools.model.SchoolListItem
 import com.rjasso.nycschools.model.SchoolSAT
+import com.rjasso.nycschools.model.SchoolSATItem
 import com.rjasso.nycschools.network.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -16,6 +17,7 @@ class NYCSchoolsRepository(val schoolsDB: NYCSchoolDB) {
     val TAG = NYCSchoolsRepository::class.java.name
 
     private var schools: MutableLiveData<List<SchoolListItem>> = MutableLiveData()
+    private var schoolsSAT: MutableLiveData<SchoolSATItem> = MutableLiveData()
 
     fun getDataFromDB() {
         Log.d(TAG,"getDataFromDB()")
@@ -45,7 +47,10 @@ class NYCSchoolsRepository(val schoolsDB: NYCSchoolDB) {
         Log.d(TAG,"getSATData()")
         RetrofitClient.instance.getSAT(dbn).enqueue(object: Callback<SchoolSAT>{
             override fun onResponse(call: Call<SchoolSAT>, response: Response<SchoolSAT>) {
-                TODO("Not yet implemented")
+                if (response.body()?.isEmpty() == false) {
+                    val schoolSAT = response.body()?.first()
+                    schoolsSAT.postValue(schoolSAT)
+                }
             }
 
             override fun onFailure(call: Call<SchoolSAT>, t: Throwable) {
@@ -53,6 +58,10 @@ class NYCSchoolsRepository(val schoolsDB: NYCSchoolDB) {
             }
 
         })
+    }
+
+    fun getSchoolsSAT(): LiveData<SchoolSATItem> {
+        return schoolsSAT
     }
 
 }

@@ -2,6 +2,7 @@ package com.rjasso.nycschools.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 @Entity(tableName = "NYCSchools")
 data class SchoolListItem(
@@ -208,4 +209,4 @@ data class SchoolListItem(
     val transfer: String?,
     val website: String?,
     val zip: String?
-)
+) : Serializable
